@@ -1,19 +1,27 @@
+const jwt = require("jsonwebtoken");
+
 const usuarios = [
-  { id: 1, nome: "Usuário 1", senha: "senha1", token: "meu-token-secreto" },
-  { id: 2, nome: "Usuário 2", senha: "senha2", token: "outro-token" },
+  { id: 1, nome: "Admin", login: "admin", senha: "123456" },
+  { id: 2, nome: "User", login: "user", senha: "123456" },
 ];
 
-const login = (req, res) => {
-  const { nome, senha } = req.body;
-  console.log(nome);
-  console.log(senha);
-  const usuario = usuarios.find((u) => u.nome === nome && u.senha === senha);
+exports.login = (req, res) => {
+  const { login, senha } = req.body;
+  const usuario = usuarios.find(
+    (user) => user.login === login && user.senha === senha
+  );
+
+  console.log(usuario);
 
   if (usuario) {
-    res.json({ token: usuario.token });
+    // Gerando o token
+    const token = jwt.sign(
+      { id: usuario.id, nome: usuario.nome },
+      process.env.APP_KEY_TOKEN, // Usando a chave do .env
+      { expiresIn: "1h" }
+    );
+    res.json({ token });
   } else {
-    res.status(401).json({ mensagem: "Credenciais inválidas" });
+    res.status(401).json({ mensagem: "Login ou senha incorretos" });
   }
 };
-
-module.exports = { login };
