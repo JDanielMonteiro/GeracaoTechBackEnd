@@ -6,9 +6,8 @@ class ProdutoService {
     return this.produtos;
   }
   static consultarPorId(id) {
-    try{
-      
-    }
+    // try{
+    // }
   }
 
   static criar(produto) {
@@ -27,4 +26,4 @@ class ProdutoService {
     this.produtos = this.produtos.filter((p) => p.id !== id);
   }
 }
-module.exports = Produto;
+module.exports = ProdutoService;

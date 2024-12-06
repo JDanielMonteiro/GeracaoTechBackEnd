@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require("sequelize");
 const connection = require("../config/connection");
+const bcrypt = require("bcrypt");
 
 class User extends Model {}
 
@@ -27,9 +28,8 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
-        // Criptografa a senha antes de armazená-la no banco
-        const hashedPassword = bcrypt.hashSync(value, 10); // '10' é o número de saltos
-        this.setDataValue("password", hashedPassword); // Armazena o hash no banco de dados
+        const hashedPassword = bcrypt.hashSync(value, 10);
+        this.setDataValue("password", hashedPassword);
       },
     },
   },

@@ -1,29 +1,24 @@
-const jwt = require("jsonwebtoken");
+// authController.js
+const AuthService = require("../services/authService");
 
-const usuarios = [
-  { id: 1, nome: "Admin", login: "admin", senha: "123456" },
-  { id: 2, nome: "User", login: "user", senha: "123456" },
-];
+class AuthController {
+  static async login(req, res) {
+    const { email, password } = req.body;
 
-exports.login = (req, res) => {
-  const { login, senha } = req.body;
-  const usuario = usuarios.find(
-    (user) => user.login === login && user.senha === senha
-  );
+    try {
+      const result = await AuthService.login(email, password);
 
-  console.log(usuario);
-
-  if (usuario) {
-    const expiracao = Math.floor(Date.now() / 1000) + 60 * 60;
-
-    // Gerando o token
-    const token = jwt.sign(
-      { id: usuario.id, nome: usuario.nome },
-      process.env.APP_KEY_TOKEN, // Usando a chave do .env
-      { expiresIn: expiracao }
-    );
-    res.json({ token });
-  } else {
-    res.status(401).json({ mensagem: "Login ou senha incorretos" });
+      if (result.status === 200) {
+        res.status(200).json({ token: result.token });
+      } else {
+        res.status(result.status).json({ mensagem: result.message });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({ mensagem: "Erro no servidor", error: error.message });
+    }
   }
-};
+}
+
+module.exports = AuthController;

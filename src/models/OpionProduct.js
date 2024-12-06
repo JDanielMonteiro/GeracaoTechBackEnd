@@ -47,7 +47,7 @@ OptionProduct.init(
     },
   },
   {
-    connection,
+    sequelize: connection,
     modelName: "OptionProduct",
     tableName: "option_product",
     timestamps: true,

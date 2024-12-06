@@ -1,6 +1,6 @@
 const ProdutoService = require("../services/produtoService");
 
-class ProdutoServiceController {
+class ProdutoController {
   static listar(req, res) {
     res.status(200).json(ProdutoService.listar());
   }
@@ -35,4 +35,4 @@ class ProdutoServiceController {
   }
 }
 
-module.exports = ProdutoServiceController;
+module.exports = ProdutoController;
