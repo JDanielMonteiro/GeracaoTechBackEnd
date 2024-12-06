@@ -14,11 +14,13 @@ exports.login = (req, res) => {
   console.log(usuario);
 
   if (usuario) {
+    const expiracao = Math.floor(Date.now() / 1000) + 60 * 60;
+
     // Gerando o token
     const token = jwt.sign(
       { id: usuario.id, nome: usuario.nome },
       process.env.APP_KEY_TOKEN, // Usando a chave do .env
-      { expiresIn: "1h" }
+      { expiresIn: expiracao }
     );
     res.json({ token });
   } else {

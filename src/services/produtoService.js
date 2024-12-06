@@ -1,10 +1,14 @@
-class Produto {
+const { Product } = require("../models");
+
+class ProdutoService {
   static produtos = [];
   static listar() {
     return this.produtos;
   }
   static consultarPorId(id) {
-    return this.produtos.find((usuario) => usuario.id == id);
+    try{
+      
+    }
   }
 
   static criar(produto) {

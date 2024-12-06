@@ -1,4 +1,4 @@
-const Usuario = require("../models/usuarioModel");
+const Usuario = require("../services/usuarioModel");
 
 class UsuarioController {
   static consultarPorId(req, res) {

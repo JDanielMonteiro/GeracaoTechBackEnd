@@ -1,38 +1,38 @@
-const Produto = require("../models/produtoModel");
+const ProdutoService = require("../services/produtoService");
 
-class ProdutoController {
+class ProdutoServiceController {
   static listar(req, res) {
-    res.status(200).json(Produto.listar());
+    res.status(200).json(ProdutoService.listar());
   }
 
   static consultarPorId(req, res) {
     const id = req.params.id;
-    const Produto = Produto.consultarPorId(id);
-    if (Produto) {
-      res.status(200).json(Produto);
+    const ProdutoService = ProdutoService.consultarPorId(id);
+    if (ProdutoService) {
+      res.status(200).json(ProdutoService);
     } else {
-      res.status(404).json({ message: "Produto não encontrado" });
+      res.status(404).json({ message: "ProdutoService não encontrado" });
     }
   }
 
   static criar(req, res) {
-    const novoProduto = req.body;
-    Produto.criar(novoProduto);
-    res.status(201).json({ message: "Produto criado com sucesso" });
+    const novoProdutoService = req.body;
+    ProdutoService.criar(novoProdutoService);
+    res.status(201).json({ message: "ProdutoService criado com sucesso" });
   }
 
   static atualizar(req, res) {
     const id = req.params.id;
     const dadosAtualizados = req.body;
-    Produto.atualizar(id, dadosAtualizados);
-    res.status(200).json({ message: "Produto atualizado com sucesso" });
+    ProdutoService.atualizar(id, dadosAtualizados);
+    res.status(200).json({ message: "ProdutoService atualizado com sucesso" });
   }
 
   static excluir(req, res) {
     const id = req.params.id;
-    Produto.excluir(id);
-    res.status(200).json({ message: "Produto excluído com sucesso" });
+    ProdutoService.excluir(id);
+    res.status(200).json({ message: "ProdutoService excluído com sucesso" });
   }
 }
 
-module.exports = ProdutoController;
+module.exports = ProdutoServiceController;
