@@ -1,6 +1,6 @@
 const User = require("../models/user");
 
-class UsserService {
+class UserService {
   static async getUserByEmail(userEmail) {
     const user = await User.findOne({ where: { email: userEmail } });
 
@@ -71,4 +71,4 @@ class UsserService {
   }
 }
 
-module.exports = UsserService;
+module.exports = UserService;

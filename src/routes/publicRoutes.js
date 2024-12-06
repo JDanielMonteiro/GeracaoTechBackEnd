@@ -4,6 +4,6 @@ const authController = require("../controllers/authController");
 const UserController = require("../controllers/userController");
 
 // Rota pública para login
-router.post("/login", authController.login);
-router.post("/user", UserController.criar);
+router.post("/v1/token", authController.login);
+router.post("/v1/user", UserController.criar);
 module.exports = router;
