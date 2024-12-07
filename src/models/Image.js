@@ -1,6 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 const connection = require("../config/connection");
 const Product = require("./Product");
+
 class Image extends Model {}
 
 Image.init(

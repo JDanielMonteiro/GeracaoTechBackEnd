@@ -33,6 +33,32 @@ class ProdutoController {
     ProdutoService.excluir(id);
     res.status(200).json({ message: "ProdutoService excluído com sucesso" });
   }
+
+  productService = require("../services/productService");
+
+  static async searchProducts(req, res) {
+    try {
+      const { limit, page, fields, match, category_ids, price_range, option } =
+        req.query;
+
+      const result = await productService.searchProducts({
+        limit,
+        page,
+        fields,
+        match,
+        category_ids,
+        price_range,
+        option,
+      });
+
+      return res.status(200).json(result);
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(400)
+        .json({ message: "Erro ao buscar produtos", error: error.message });
+    }
+  }
 }
 
 module.exports = ProdutoController;

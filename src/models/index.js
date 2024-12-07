@@ -1,6 +1,6 @@
 const Product = require("./Product");
 const Image = require("./Image");
-const OptionProduct = require("./OpionProduct");
+const OptionProduct = require("./OptionProduct");
 const Category = require("./Category");
 const ProductCategory = require("./ProductCategory");
 
